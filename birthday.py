@@ -4,6 +4,9 @@ import pandas as pd
 
 
 def calculateAge(birthday):
+    if birthday == '':
+        return -1
+
     birthday = datetime.strptime(birthday, '%Y-%m-%d')
     today = date.today()
     age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
@@ -11,7 +14,7 @@ def calculateAge(birthday):
     return age
 
 
-users = pd.DataFrame(['2000-01-01', '2005-01-01', '2010-12-31'], columns=['birthday'])
+users = pd.DataFrame(['', '2005-01-01', '2010-12-31'], columns=['birthday'])
 
 users['age'] = users.apply(lambda row: calculateAge(row['birthday']), axis=1)
 
